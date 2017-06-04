@@ -1,0 +1,25 @@
+:username: xxx
+:ip: 10.0.0.25
+:light_id: 1
+:timeout: 10
+:timeslots:
+  -
+    :start: 6
+    :end: 8
+    :bri: 255
+    :ct: 153
+  -
+    :start: 8
+    :end: 19
+    :bri: 255
+    :ct: 240
+  -
+    :start: 20
+    :end: 23
+    :bri: 255
+    :ct: 500
+  -
+    :start: 23
+    :end: 6
+    :bri: 51
+    :ct:  500
