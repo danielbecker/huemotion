@@ -1,6 +1,5 @@
 #!/Users/db/.rvm/rubies/ruby-2.1.6/bin/ruby
 require 'yaml'
-require 'pry'
 require './hue_connection'
 
 @config = YAML::load_file('config.yml')
@@ -12,7 +11,13 @@ timeout_counter = 0
 active = true
 
 def current_timeslot_config
-  @config[:timeslots].find { |slot| (slot[:start]..slot[:end]) === Time.now.hour  }
+  @config[:timeslots].find do |slot|
+    if slot[:start] < slot[:end]
+      (slot[:start]..slot[:end]) === Time.now.hour
+    else
+      (slot[:start]..23) === Time.now.hour || (0..slot[:end]) === Time.now.hour
+    end
+  end
 end
 
 while active
