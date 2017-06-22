@@ -19,6 +19,10 @@ class HueConnection
   def sensor_state(id)
     response = self.class.get("/sensors/#{id}").parsed_response
     response['state']['presence']
+  rescue Errno::ECONNREFUSED
+    log_info 'Connection to huebridge failed, retrying...'
+    sleep 5
+    retry
   end
 
   def lights
